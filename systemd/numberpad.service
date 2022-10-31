@@ -1,0 +1,9 @@
+[Unit]
+Description=ASUS Numberpad driver
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/numberpad -m "D415UA" -f "/etc/numberpad/layouts.json"
+
+[Install]
+WantedBy=multi-user.target

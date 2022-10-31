@@ -1,0 +1,54 @@
+{
+    "D415UA": {
+        "width": 3204,
+        "height": 1833,
+        "top_left": {
+            "x": 0,
+            "y": 300
+        },
+        "bottom_right": {
+            "x": 3104,
+            "y": 1833
+        },
+        "numlock": {
+            "top_left": {
+                "x": 2904,
+                "y": 0
+            },
+            "bottom_right": {
+                "x": 3204,
+                "y": 300
+            }
+        },
+        "key_bindings": [
+            [
+                "KEY_KP7",
+                "KEY_KP8",
+                "KEY_KP9",
+                "KEY_KPSLASH",
+                "KEY_BACKSPACE"
+            ],
+            [
+                "KEY_KP4",
+                "KEY_KP5",
+                "KEY_KP6",
+                "KEY_KPASTERISK",
+                "KEY_BACKSPACE"
+            ],
+            [
+                "KEY_KP1",
+                "KEY_KP2",
+                "KEY_KP3",
+                "KEY_KPMINUS",
+                "KEY_5"
+            ],
+            [
+                "KEY_KP0",
+                "KEY_KPDOT",
+                "KEY_KPENTER",
+                "KEY_KPPLUS",
+                "KEY_KPEQUAL"
+            ]
+        ]
+    }
+}

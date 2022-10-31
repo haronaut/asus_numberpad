@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/numberpad.dir/src/main.cpp.o CMakeFiles/numberpad.dir/src/i2c_device.cpp.o CMakeFiles/numberpad.dir/src/numberpad.cpp.o CMakeFiles/numberpad.dir/src/touchpad_detect.cpp.o CMakeFiles/numberpad.dir/src/easylogging++.cc.o -o numberpad  -levdev 
