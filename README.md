@@ -1,6 +1,7 @@
 # ASUS Notebook numberpad driver
 
-##Supported device:
+## Supported device:
 
-###- D415U
+### - D415U
 
+Note: Only tested on Ubuntu 22.04
