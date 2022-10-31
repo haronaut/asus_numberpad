@@ -1,9 +1,0 @@
-/home/hk/vscode_workspace/asus_numberpad/debug/CMakeFiles/numberpad.dir
-/home/hk/vscode_workspace/asus_numberpad/debug/CMakeFiles/package.dir
-/home/hk/vscode_workspace/asus_numberpad/debug/CMakeFiles/package_source.dir
-/home/hk/vscode_workspace/asus_numberpad/debug/CMakeFiles/edit_cache.dir
-/home/hk/vscode_workspace/asus_numberpad/debug/CMakeFiles/rebuild_cache.dir
-/home/hk/vscode_workspace/asus_numberpad/debug/CMakeFiles/list_install_components.dir
-/home/hk/vscode_workspace/asus_numberpad/debug/CMakeFiles/install.dir
-/home/hk/vscode_workspace/asus_numberpad/debug/CMakeFiles/install/local.dir
-/home/hk/vscode_workspace/asus_numberpad/debug/CMakeFiles/install/strip.dir
