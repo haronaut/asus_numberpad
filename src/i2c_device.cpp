@@ -17,8 +17,7 @@ void I2CDevice::connect(){
         throw std::runtime_error("unable to open i2c device file.");
     }
     else{
-        std::cerr<<"success: "<<m_fd_device<<std::endl;
-    
+        
         int addr = 0x15; 
         int rc = 0; 
         //Force to use the device i2c address as it is already used by a kernel module

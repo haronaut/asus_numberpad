@@ -24,7 +24,8 @@ std::tuple<uint8_t, uint8_t>  detect_touchpad(){
         if (touchpad_section_found && std::regex_match(line, matches, i2c_touchpad_regex)) {
             
             if(matches.size()!=2){
-                throw std::runtime_error("Error while parsing touchpad information, despite an Asus touchpad was found.");
+                LOG(FATAL) << "Error while parsing touchpad information, despite an Asus touchpad was found.";
+                exit(1);
             }
             i2c_bus = std::stoi(matches[1].str());
             LOG(INFO) << "Found Asus i2c bus id: " << unsigned(i2c_bus);

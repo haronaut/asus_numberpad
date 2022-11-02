@@ -30,6 +30,7 @@ void Numberpad::createUinputDevice()
     libevdev_enable_event_type(m_dev_uniput_dummy, EV_KEY);
     libevdev_enable_event_type(m_dev_uniput_dummy, EV_SYN);
     libevdev_enable_event_code(m_dev_uniput_dummy, EV_KEY, KEY_NUMLOCK, NULL);
+    libevdev_enable_event_code(m_dev_uniput_dummy, EV_KEY, KEY_LEFTSHIFT, NULL);
 
     for(const int key : m_layout.key_bindings){
         libevdev_enable_event_code(m_dev_uniput_dummy, EV_KEY, key, NULL);
@@ -123,13 +124,15 @@ void Numberpad::triggerKey(int x, int y)
 
     LOG(DEBUG) << " key: " << libevdev_event_code_get_name(EV_KEY,  m_layout.getKey(x, y));
 
+    //trigger special key combination to generate percentage key. KEY_5 + KEY_LEFTSHIFT
     if ( m_layout.getKey(x, y) == KEY_5)
     {
         libevdev_uinput_write_event(m_dev_uinput, EV_KEY, KEY_LEFTSHIFT, 1);
         libevdev_uinput_write_event(m_dev_uinput, EV_SYN, SYN_REPORT, 0);
-        usleep(10000);
+        usleep(20000);
         libevdev_uinput_write_event(m_dev_uinput, EV_KEY, KEY_5, 1);
         libevdev_uinput_write_event(m_dev_uinput, EV_KEY, KEY_5, 0);
+        
         libevdev_uinput_write_event(m_dev_uinput, EV_KEY, KEY_LEFTSHIFT, 0);
         libevdev_uinput_write_event(m_dev_uinput, EV_SYN, SYN_REPORT, 0);
     }
@@ -182,10 +185,9 @@ void Numberpad::processInput(const struct input_event &ev)
             {
                 x_up = x;
                 y_up = y;
-                // touchpad keys here
+                
                 if (m_pad_is_active)
                 {
-
                     if (sqrt(pow(x_up - x_down, 2.0) + pow(y_up - y_down, 2.0)) < 40.0)
                     {
                         triggerKey(x, y);
@@ -202,37 +204,16 @@ void Numberpad::waitForInput(libevdev *dev)
     LOG(INFO) << "Waiting for touchpad input...";
     int rc = -1;
 
-    for (;;)
-    {
-        struct input_event ev;
-
-        rc = libevdev_next_event(dev, LIBEVDEV_READ_FLAG_NORMAL, &ev);
-
-        if (rc == LIBEVDEV_READ_STATUS_SYNC)
-        {
-
-            do
-            {
-                struct input_event ev;
-                rc = libevdev_next_event(dev, LIBEVDEV_READ_FLAG_SYNC, &ev);
-            } while (rc == LIBEVDEV_READ_STATUS_SYNC);
-        }
-        else if (rc == LIBEVDEV_READ_STATUS_SUCCESS)
-        {
-
+    do {
+         struct input_event ev;
+         rc = libevdev_next_event(dev, LIBEVDEV_READ_FLAG_NORMAL, &ev);
+         if (rc == 0){
             LOG(DEBUG) << "Event type: " << libevdev_event_type_get_name(ev.type)
-                      << " code: " << libevdev_event_code_get_name(ev.type, ev.code)
-                      << " value: " << ev.value;
-            processInput(ev);
-        }
-        else if (rc == -EAGAIN)
-        {
-        }
-        else
-        {
-            throw std::runtime_error("Error while reading evdev events. Error code: " + std::string(strerror(-rc)));
-        }
-    };
+                       << " code: " << libevdev_event_code_get_name(ev.type, ev.code)
+                       << " value: " << ev.value;
+             processInput(ev);
+         }
+    } while (rc == LIBEVDEV_READ_STATUS_SYNC || rc == LIBEVDEV_READ_STATUS_SUCCESS || rc == -EAGAIN);
 }
 
 void Numberpad::run()
