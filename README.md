@@ -12,4 +12,4 @@ libevdev, libi2c
 ---
 Note: Only tested on Ubuntu 22.04
 
-Download: [0.0.1] (https://github.com/haronaut/asus_numberpad/releases/download/0.0.1/numberpad_0.0.1_amd64.deb)
+Download: [0.0.2] (https://github.com/haronaut/asus_numberpad/releases/download/0.0.2/numberpad_0.0.2_amd64.deb)
